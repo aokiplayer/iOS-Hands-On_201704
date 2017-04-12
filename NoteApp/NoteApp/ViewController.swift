@@ -41,14 +41,18 @@ class ViewController: UIViewController {
 
         // 文字列を、テキストビューに表示
         textView.text = newNote
+
+        // 更新したメモの内容を、ユーザデフォルトを利用して永続化（キーとして "note" を指定）
+        let defaults = UserDefaults.standard
+        defaults.set(newNote, forKey: "note")
     }
 
     /// 画面が読み込まれ、ビューが準備完了後に呼ばれるメソッド
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // テキストビューの表示内容を、あらかじめクリアしておく
-        textView.text = ""
+        // 保存済みのメモを、あらかじめテキストビューに表示させておく（保存時のキーを指定）
+        textView.text = UserDefaults.standard.string(forKey: "note")
     }
 
     /// メモリ不足の際に呼ばれるメソッド
