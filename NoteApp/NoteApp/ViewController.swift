@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+/// UITextFieldDelegateプロトコルを適用することで、ビューコントローラ自体がdelegateとなる
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var textView: UITextView!
@@ -16,8 +17,8 @@ class ViewController: UIViewController {
 
     /// 追加ボタンがタップされた際に実行されるメソッド
     @IBAction func addNote(_ sender: UIButton) {
-        // メモに追加するメソッドを実行
-        self.addNewNote()
+        // 入力を終了させたいので、テキストフィールドからカーソルを外しておく
+        textField.resignFirstResponder()
     }
 
     /// 入力内容をメモに追加するメソッド
@@ -51,6 +52,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // テキストフィールドのdelegateとして、ビューコントローラ自身（UITextFieldDelegateに適応）を指定
+        textField.delegate = self
+
         // 保存済みのメモを、あらかじめテキストビューに表示させておく（保存時のキーを指定）
         textView.text = UserDefaults.standard.string(forKey: "note")
     }
@@ -58,5 +62,20 @@ class ViewController: UIViewController {
     /// メモリ不足の際に呼ばれるメソッド
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    // MARK: - UITextFieldDelegate
+
+    /// テキストフィールド内で、Returnキーが押された際に実行されるメソッド
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 入力を終了させたいので、テキストフィールドからカーソルを外しておく
+        textField.resignFirstResponder()
+        return true
+    }
+
+    /// テキストフィールド内の入力終了の際に実行されるメソッド
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // メモの追加メソッドを呼び出し
+        self.addNewNote()
     }
 }
