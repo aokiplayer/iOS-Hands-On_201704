@@ -35,9 +35,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         // テキストビューに表示されている文字列を取得できた場合は、改行文字と入力値を追加
         if let currentNote = textView.text, !currentNote.isEmpty {
-            newNote = "\(line)\n\(currentNote)"
+            newNote = "[\(self.currentTimeText)] \(line)\n\(currentNote)"
         } else {
-            newNote = line
+            newNote = "[\(self.currentTimeText)] \(line)"
         }
 
         // 文字列を、テキストビューに表示
@@ -46,6 +46,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // 更新したメモの内容を、ユーザデフォルトを利用して永続化（キーとして "note" を指定）
         let defaults = UserDefaults.standard
         defaults.set(newNote, forKey: "note")
+    }
+
+    /// 現在日時文字列を返すプロパティ（Computedプロパティとして、アクセスのたびに計算させる）
+    private var currentTimeText: String {
+        // 現在日時
+        let now = Date()
+
+        // 日時フォーマットオブジェクト
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+
+        // 日付をGMTでなく、日本のロケールでフォーマットするように指定
+        formatter.locale = Locale(identifier: "ja_JP")
+
+        // 日付をフォーマットし、文字列として返す
+        let nowText = formatter.string(from: now)
+        return nowText
     }
 
     /// 画面が読み込まれ、ビューが準備完了後に呼ばれるメソッド
