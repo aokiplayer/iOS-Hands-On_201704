@@ -1,8 +1,8 @@
 # iOS-Hands-On_201704
 For iOS app development introduction hands-on free seminar.
 
-## Requirements
-- Xcode 8.x (iOS 10.x, Swift 3.x)
+## Requirements(Updated)
+- Xcode 9.x (iOS 11.x, Swift 4.x)
 
 ## Components in this sample
 ### View
