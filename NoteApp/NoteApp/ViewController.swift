@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  NoteApp
-//
-//  Created by Hiroyuki Aoki on 2017/04/12.
-//  Copyright © 2017 CASAREAL, Inc. All rights reserved.
-//
-
 import UIKit
 
 /// UITextFieldDelegateプロトコルを適用することで、ビューコントローラ自体がdelegateとなる

@@ -2,7 +2,7 @@
 For iOS app development introduction hands-on free seminar.
 
 ## Requirements(Updated)
-- Xcode 9.x (iOS 11.x, Swift 4.x)
+- Xcode 10 (iOS 12, Swift 5)
 
 ## Components in this sample
 ### View
